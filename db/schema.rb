@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_140222) do
+ActiveRecord::Schema.define(version: 2019_11_18_153505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "food_trucks", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.integer "price"
+    t.string "city"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_food_trucks_on_users_id"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "food_truck_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "checkin_date"
+    t.date "checkout_date"
+    t.date "accepted_at"
+    t.date "paid_at"
+    t.index ["food_truck_id"], name: "index_reservations_on_food_truck_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +48,14 @@ ActiveRecord::Schema.define(version: 2019_11_18_140222) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "Foodtruckowner"
+    t.string "name"
+    t.text "description"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "food_trucks", "users", column: "users_id"
+  add_foreign_key "reservations", "food_trucks"
+  add_foreign_key "reservations", "users"
 end

@@ -9,9 +9,9 @@
     <div class="row">
     <% @foodtrucks.each do |foodtruck| %>
       <% if foodtruck.photo.present? %>
-        <% url = cl_image_tag foodtruck.photo, height: 300, width: 300, crop: :fill %>
+        <% url = cl_image_path foodtruck.photo, height: 300, width: 300, crop: :fill %>
       <% else %>
-        <% url = cl_image_tag "generic_l79l58", height: 300, width: 300, crop: :fill %>
+        <% url = cl_image_path "generic_l79l58", height: 300, width: 300, crop: :fill %>
     <% end %>
       <div class="col-4">
         <%= link_to food_truck_path(foodtruck) do %>

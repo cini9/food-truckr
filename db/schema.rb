@@ -23,22 +23,22 @@ ActiveRecord::Schema.define(version: 2019_11_18_163328) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "users_id"
+    t.bigint "user_id"
     t.string "photo"
-    t.index ["users_id"], name: "index_food_trucks_on_users_id"
+    t.index ["user_id"], name: "index_food_trucks_on_user_id"
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.bigint "users_id"
-    t.bigint "food_trucks_id"
+    t.bigint "user_id"
+    t.bigint "food_truck_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "checkin_date"
     t.date "checkout_date"
     t.date "accepted_at"
     t.date "paid_at"
-    t.index ["food_trucks_id"], name: "index_reservations_on_food_trucks_id"
-    t.index ["users_id"], name: "index_reservations_on_users_id"
+    t.index ["food_truck_id"], name: "index_reservations_on_food_truck_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2019_11_18_163328) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "food_trucks", "users", column: "users_id"
-  add_foreign_key "reservations", "food_trucks", column: "food_trucks_id"
-  add_foreign_key "reservations", "users", column: "users_id"
+  add_foreign_key "food_trucks", "users"
+  add_foreign_key "reservations", "food_trucks"
+  add_foreign_key "reservations", "users"
 end

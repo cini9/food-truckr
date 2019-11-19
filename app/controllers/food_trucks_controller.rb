@@ -1,7 +1,7 @@
 class FoodTrucksController < ApplicationController
   before_action :set_foodtruck, only: [:show, :edit, :new]
   def index
-    @food_trucks = FoodTruck.all
+    @foodtrucks = FoodTruck.all
   end
 
   def new

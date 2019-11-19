@@ -6,9 +6,9 @@
 
 <div class="index container mt-3">
   <div class="cards">
-    <% @food_trucks.each do |food_truck| %>
+    <% @foodtrucks.each do |foodtruck| %>
       <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))">
-        <%= cl_image_tag @article.photo, height: 300, width: 400, crop: :fill %>
+        <%= cl_image_tag foodtruck.photo, height: 300, width: 400, crop: :fill %>
         <%= food_truck.name %>
         <%= link_to food_truck.name, root_path(food_truck) %>
       </div>

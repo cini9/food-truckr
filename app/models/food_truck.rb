@@ -5,7 +5,7 @@ class FoodTruck < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   has_many :reservations, dependent: :destroy
-  has_many :users, through: :reservations
+  belongs_to :user
   validates :name, presence: true, uniqueness: true
   validates :category, inclusion: { in: CATEGORY }
   validates :price, presence: true

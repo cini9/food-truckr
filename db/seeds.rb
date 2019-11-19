@@ -6,19 +6,19 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-require 'faker'
+# require 'faker'
 
 # Food truck seed
 
-FoodTruck.destroy_all
+# FoodTruck.destroy_all
 
-10.times do |foodtruck|
-  foodtruck = FoodTruck.new({
-    name: Faker::Restaurant.name,
-    category: FoodTruck::CATEGORY.sample,
-    price: Faker::Number.within(range: 100..1000),
-    city: "Lausanne",
-    description: Faker::Lorem.paragraph
-  })
-  foodtruck.save!
-end
+# 10.times do |foodtruck|
+#   foodtruck = FoodTruck.new({
+#     name: Faker::Restaurant.name,
+#     category: FoodTruck::CATEGORY.sample,
+#     price: Faker::Number.within(range: 100..1000),
+#     city: "Lausanne",
+#     description: Faker::Lorem.paragraph
+#   })
+#   foodtruck.save!
+# end

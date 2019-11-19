@@ -1,0 +1,36 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-8 center-block">
+      <div class="container">
+        <div class="column">
+          <div class="card" style="width: 100%;">
+            <%= cl_image_tag @foodtruck.photo, height: 300, width: 400, crop: :fill, class: "card-img-top" %>
+          <!--   <img src="https://source.unsplash.com/random/400x300" class="card-img-top" alt="..."> -->
+            <div class="card-body">
+              <p class="card-text"><%= @foodtruck.description %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="container">
+        <div class="column center-block">
+          <div class="col-sm ">
+            <div class="label">name :</div> <div class="text-box "><%= @foodtruck.name %></div>
+          </div>
+          <div class="col-sm ">
+            <div class="label">city :</div> <div class="text-box"><%= @foodtruck.city %></div>
+          </div>
+          <div class="col-sm ">
+            <div class="label">category :</div> <div class="text-box"><%= @foodtruck.category %></div>
+          </div>
+          <div class="col-sm ">
+            <div class="label">price :</div>  <div class="text-box"> <%= @foodtruck.price %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

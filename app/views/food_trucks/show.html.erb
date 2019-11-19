@@ -6,7 +6,7 @@
         <div class="column">
           <div class="card" style="width: 100%;">
             <% if @foodtruck.photo.present? %>
-              <%= cl_image_tag cocktail.photo, crop: :fill, class: "card-img-top" %>
+              <%= cl_image_tag @foodtruck.photo, crop: :fill, class: "card-img-top" %>
             <% else %>
               <%= cl_image_tag "generic_l79l58",crop: :fill, class: "card-img-top" %>
             <% end %>
@@ -30,7 +30,12 @@
           <div class="col-sm ">
             <div class="label">price :</div>  <div class="text-box"> <%= @foodtruck.price %></div>
           </div>
-          <div class="col-sm"><%= link_to "back", root_path, class: 'btn btn-primary' %><%= link_to "edit", root_path, class: 'btn btn-primary ml-3' %></div>
+          <div class="col-sm">
+            <%= link_to "back", root_path, class: 'btn btn-primary' %>
+            <% if policy(@foodtruck).edit? %>
+              <%= link_to "edit", root_path, class: 'btn btn-primary ml-3' %>
+            <% end %>
+          </div>
           <div class="col-sm"></div>
         </div>
       </div>

@@ -1,11 +1,13 @@
 class FoodTrucksController < ApplicationController
   before_action :set_foodtruck, only: [:show, :edit]
+
   def index
-    @foodtrucks = FoodTruck.all
+    @foodtrucks = policy_scope(FoodTruck).order(created_at: :desc)
   end
 
   def new
     @foodtruck = FoodTruck.new
+    authorize @foodtruck
   end
 
   def create
@@ -16,9 +18,12 @@ class FoodTrucksController < ApplicationController
     else
       render 'new'
     end
+
+    authorize @foodtruck
   end
 
   def show
+    authorize @foodtruck
   end
 
   private

@@ -1,7 +1,11 @@
 class FoodTrucksController < ApplicationController
   before_action :set_foodtruck, only: [:show, :edit]
   def index
-    @foodtrucks = FoodTruck.all
+    if params[:search]
+      @foodtrucks = FoodTruck.where(category: params[:search])
+    else
+      @foodtrucks = FoodTruck.all
+    end
   end
 
   def new
@@ -24,7 +28,7 @@ class FoodTrucksController < ApplicationController
   private
 
   def foodtruck_params
-    params.require(:food_truck).permit(:name, :category, :price, :city, :description, :photo)
+    params.require(:food_truck).permit(:name, :category, :price, :city, :description, :photo, :search)
   end
 
   def set_foodtruck

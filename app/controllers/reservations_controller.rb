@@ -13,12 +13,11 @@ class ReservationsController < ApplicationController
       redirect_to foodtruck_path(@foodtruck)
     else
       render "foodtrucks/show"
-
-  def index
-    @reservation = Reservation.where(user_id = current_user.id)
+    end
   end
 
-    end
+  def index
+    @reservations = Reservation.where(user_id: current_user.id)
   end
 
   private

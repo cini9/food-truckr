@@ -1,0 +1,17 @@
+.banner {
+  margin: 0 auto;
+  background-size: cover;
+  height: calc(100vh - 80px);
+  background-position: center;
+  padding: 150px 0;
+  h1 {
+    margin: 0;
+    margin-left: 20px;
+    color: #FD0E14;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    font-size: 80px;
+    font-weight: bold;
+    font-family: 'Pacifico', cursive;
+    font-weight: lighter;
+  }
+}

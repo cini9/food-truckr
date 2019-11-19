@@ -1,0 +1,11 @@
+<div class="banner" style="background-image: url('https://images.unsplash.com/photo-1500338427510-5deb175987d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1654&q=80');">>
+  <h1>Food Truckr</h1>
+</div>
+
+<div class="index">
+  <% @food_trucks.each do |food_truck|%>
+  <h2 class="name"> <%= link_to food_truck.name, root_path(food_truck) %></h2>
+  <% end %>
+</div>
+
+<h2 class="mt-3 row justify-content-center">See Food trucks around you!</h2>

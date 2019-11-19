@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 2019_11_18_163328) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "users_id"
     t.string "photo"
-    t.index ["user_id"], name: "index_food_trucks_on_user_id"
+    t.index ["users_id"], name: "index_food_trucks_on_users_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -49,14 +49,14 @@ ActiveRecord::Schema.define(version: 2019_11_18_163328) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "food_truck_owner"
+    t.boolean "Foodtruckowner"
     t.string "name"
     t.text "description"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "food_trucks", "users"
+  add_foreign_key "food_trucks", "users", column: "users_id"
   add_foreign_key "reservations", "food_trucks"
   add_foreign_key "reservations", "users"
 end

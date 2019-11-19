@@ -14,6 +14,10 @@ class ReservationsController < ApplicationController
     else
       render "foodtrucks/show"
 
+  def index
+    @reservation = Reservation.where(user_id = current_user.id)
+  end
+
     end
   end
 

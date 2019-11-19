@@ -1,0 +1,32 @@
+<div class="banner" style="background-image: url('https://images.unsplash.com/photo-1533229613598-751dc97ec35f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');">>
+  <h1>Your bookings</h1>
+</div>
+
+<h2 class="mt-3 row justify-content-center">So far you have booked</h2>
+
+<div class="index container mt-3">
+  <div class="cards">
+    <div class="row">
+    <% @reservations.each do |reservation| %>
+    <h3><%= reservation.foodtruck.name %></h3>
+    <p><%= reservation.checkin_date %></p>
+    <p><%= reservation.checkout_date %></p>
+    <p><%= reservation.accepted_at%></p>
+    <p><%= reservation.paid_at%></p>
+    <% end %>
+    <% if foodtruck.photo.present? %>
+        <% url = cl_image_path foodtruck.photo, height: 300, width: 300, crop: :fill %>
+      <% else %>
+        <% url = cl_image_path "generic_l79l58", height: 300, width: 300, crop: :fill %>
+    <% end %>
+      <div class="col-4">
+        <%= link_to food_truck_path(reservation) do %>
+          <div class="card-category my-2", id="reservation-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
+            <%= reservation.name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

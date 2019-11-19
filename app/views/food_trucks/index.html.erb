@@ -6,11 +6,20 @@
 
 <div class="index container mt-3">
   <div class="cards">
-    <% @food_trucks.each do |food_truck| %>
-      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))">
-        <%= cl_image_tag @article.photo, height: 300, width: 400, crop: :fill %>
-        <%= food_truck.name %>
-        <%= link_to food_truck.name, root_path(food_truck) %>
+    <div class="row">
+    <% @foodtrucks.each do |foodtruck| %>
+    <% if foodtruck.photo.present? %>
+      <% url = cl_image_path foodtruck.photo, height: 300, width: 300, crop: :fill %>
+    <% else %>
+      <% url = cl_image_path "generic_l79l58", height: 300, width: 300, crop: :fill %>
+    <% end %>
+      <div class="col-4">
+        <%= link_to food_truck_path(foodtruck) do %>
+          <div class="card-category my-2", id="foodtruck-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
+            <%= foodtruck.name %>
+          </div>
+        <% end %>
       </div>
     <% end %>
+  </div>
   </div>

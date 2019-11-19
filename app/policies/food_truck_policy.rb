@@ -14,7 +14,7 @@ class FoodTruckPolicy < ApplicationPolicy
   end
 
   def create?
-    user.food_truck_owner
+    true
   end
 
   def edit?

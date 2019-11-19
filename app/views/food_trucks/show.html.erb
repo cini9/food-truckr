@@ -6,14 +6,11 @@
         <div class="column">
           <div class="card" style="width: 100%;">
             <% if @foodtruck.photo.present? %>
-              <% url = cl_image_path cocktail.photo, height: 300, width: 300, crop: :fill, class: "card-img-top" %>
+              <%= cl_image_tag cocktail.photo, crop: :fill, class: "card-img-top" %>
             <% else %>
-              <% url = cl_image_path “generic_l79l58”, height: 300, width: 300, crop: :fill, class: "card-img-top" %>
+              <%= cl_image_tag "generic_l79l58",crop: :fill, class: "card-img-top" %>
             <% end %>
-          <!--   <img src="https://source.unsplash.com/random/400x300" class="card-img-top" alt="...">
-            <div class="card-body"> -->
-              <p class="card-text"><%= @foodtruck.description %></p>
-            </div>
+              <p class="card-text p-3"><%= @foodtruck.description %></p>
           </div>
         </div>
       </div>
@@ -33,7 +30,8 @@
           <div class="col-sm ">
             <div class="label">price :</div>  <div class="text-box"> <%= @foodtruck.price %></div>
           </div>
-          <div class="col-sm"><%= link_to "back", root_path, class: 'btn btn-primary' %></div>
+          <div class="col-sm"><%= link_to "back", root_path, class: 'btn btn-primary' %><%= link_to "edit", root_path, class: 'btn btn-primary ml-3' %></div>
+          <div class="col-sm"></div>
         </div>
       </div>
     </div>

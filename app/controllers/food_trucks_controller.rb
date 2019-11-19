@@ -7,7 +7,6 @@ class FoodTrucksController < ApplicationController
   end
 
   def show
-    @foodtruck = FoodTruck.find(params[:id])
   end
 
   private

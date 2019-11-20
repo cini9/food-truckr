@@ -33,7 +33,7 @@
           <div class="col-sm">
             <%= link_to "back", root_path, class: 'btn btn-primary' %>
             <% if policy(@foodtruck).edit? %>
-              <%= link_to "edit", root_path, class: 'btn btn-primary ml-3' %>
+              <%= link_to "edit", edit_food_truck_path(@foodtruck), class: 'btn btn-primary ml-3' %>
             <% end %>
           </div>
           <div class="col-sm">

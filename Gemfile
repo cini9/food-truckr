@@ -20,6 +20,7 @@ gem 'carrierwave', '~> 1.2'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'pundit'
 gem 'money-rails'
+gem 'stripe'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

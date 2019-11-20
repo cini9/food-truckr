@@ -1,5 +1,4 @@
 class ReservationsController < ApplicationController
-
   def new
     @foodtruck = FoodTruck.find(params[:food_truck_id])
     @reservation = Reservation.new
@@ -10,8 +9,23 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     @reservation.user = current_user
     @reservation.food_truck = @foodtruck
+    @reservation.amount_cents = @foodtruck.price_cents
     if @reservation.save!
-      redirect_to food_truck_reservations_path
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+          name: @foodtruck.name,
+          images: [@foodtruck.photo_url],
+          amount: @foodtruck.price_cents,
+          currency: 'CHF',
+          quantity: 1
+        }],
+        success_url: food_truck_reservation_url(@foodtruck, @reservation),
+        cancel_url: food_truck_reservation_url(@foodtruck, @reservation)
+      )
+
+      @reservation.update(checkout_session_id: session.id)
+      redirect_to new_food_truck_reservation_payment_path(@foodtruck, @reservation)
     else
       render "food_trucks/show"
     end
@@ -19,6 +33,10 @@ class ReservationsController < ApplicationController
 
   def index
     @reservations = Reservation.where(user_id: current_user.id)
+  end
+
+  def show
+    @reservation = current_user.reservations.find(params[:id])
   end
 
   private

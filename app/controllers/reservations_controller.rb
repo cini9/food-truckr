@@ -11,7 +11,7 @@ class ReservationsController < ApplicationController
     @reservation.user = current_user
     @reservation.food_truck = @foodtruck
     if @reservation.save!
-      redirect_to food_truck_reservations_path
+      redirect_to reservations_path
     else
       render "food_trucks/show"
     end

@@ -28,7 +28,7 @@
             <div class="label">category :</div> <div class="text-box"><%= @foodtruck.category %></div>
           </div>
           <div class="col-sm ">
-            <div class="label">price :</div>  <div class="text-box"> <%= @foodtruck.price %></div>
+            <div class="label">price :</div>  <div class="text-box"> <%= "#{humanized_money(@foodtruck.price_cents)} #{@foodtruck.price_currency}" %></div>
           </div>
           <div class="col-sm">
             <%= link_to "back", root_path, class: 'btn btn-primary' %>

@@ -15,7 +15,7 @@ class ReservationsController < ApplicationController
         payment_method_types: ['card'],
         line_items: [{
           name: @foodtruck.name,
-          images: [@foodtruck.photo_url],
+          # images: [@foodtruck.photo_url],
           amount: @foodtruck.price_cents,
           currency: 'CHF',
           quantity: 1

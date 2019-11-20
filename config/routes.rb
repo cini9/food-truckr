@@ -2,6 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'food_trucks#index'
   resources :food_trucks, only: [:index, :show, :new, :create] do
-    resources :reservations, only: [:new, :create]
+    resources :reservations, only: [:new, :create, :index]
   end
 end

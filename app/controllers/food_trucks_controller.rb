@@ -35,6 +35,7 @@ class FoodTrucksController < ApplicationController
 
   def show
     authorize @foodtruck
+    @reservation = Reservation.new
   end
 
   private

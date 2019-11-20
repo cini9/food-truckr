@@ -36,7 +36,13 @@
               <%= link_to "edit", root_path, class: 'btn btn-primary ml-3' %>
             <% end %>
           </div>
-          <div class="col-sm"></div>
+          <div class="col-sm">
+            <%= simple_form_for [@foodtruck, @reservation] do |f| %>
+            <%= f.input :checkin_date %>
+            <%= f.input :checkout_date %>
+            <%= f.button :submit, class: "btn btn-primary" %>
+           <% end %>
+          </div>
         </div>
       </div>
     </div>

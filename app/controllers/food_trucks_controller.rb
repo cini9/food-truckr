@@ -36,6 +36,21 @@ class FoodTrucksController < ApplicationController
     authorize @foodtruck
   end
 
+  def edit
+    authorize @foodtruck
+  end
+
+  def update
+    if @foodtruck.update(foodtruck_params)
+      redirect_to food_truck_path(@foodtruck)
+      flash[:notice] = 'Food Truck updated'
+    else
+      render :edit
+      flash.now[:error] = 'Food truck not updated !'
+    end
+    authorize @foodtruck
+  end
+
   private
 
   def foodtruck_params

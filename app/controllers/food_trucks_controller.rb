@@ -1,5 +1,6 @@
 class FoodTrucksController < ApplicationController
   before_action :set_foodtruck, only: [:show, :edit]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     if params[:search].nil? || params[:search].empty?
@@ -34,6 +35,7 @@ class FoodTrucksController < ApplicationController
 
   def show
     authorize @foodtruck
+    @reservation = Reservation.new
   end
 
   def edit

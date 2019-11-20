@@ -2,7 +2,7 @@
   <%= simple_form_for @foodtruck do |f| %>
     <%= f.input :name %>
     <%= f.input :category, collection: FoodTruck::CATEGORY %>
-    <%= f.input :price %>
+    <%= f.input :price_cents %>
     <%= f.input :city %>
     <%= f.input :description %>
     <%= f.input :photo %>

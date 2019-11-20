@@ -21,7 +21,7 @@
           <div class="card-category my-2 d-flex flex-column bd-highlight mb-3", id="reservation-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
 
             <% if reservation.food_truck.user == current_user %>
-              <div class="reservation_cards p-2 bd-highlight"><%= reservation.user.name%></div>
+              <div class="reservation_cards p-2 bd-highlight"><%= reservation.user.email%></div>
             <% end %>
 
             <div class="reservation_cards p-2 bd-highlight"><%= reservation.food_truck.name %></div>

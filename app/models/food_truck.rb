@@ -1,6 +1,5 @@
 class FoodTruck < ApplicationRecord
-
-  CATEGORY = [ "italian", "turkish", "belgian", "chinese", "japanese", "french", "burgers", "vegan" ]
+  CATEGORY = ["italian", "turkish", "belgian", "chinese", "japanese", "french", "burgers", "vegan"]
 
   mount_uploader :photo, PhotoUploader
 

@@ -2,7 +2,17 @@ class FoodTrucksController < ApplicationController
   before_action :set_foodtruck, only: [:show, :edit]
 
   def index
-    @foodtrucks = policy_scope(FoodTruck).order(created_at: :desc)
+    if params[:search].nil? || params[:search].empty?
+      @foodtrucks = policy_scope(FoodTruck).order(created_at: :desc)
+    else
+      @foodtrucks = policy_scope(FoodTruck).where(category: params[:search]).order(created_at: :desc)
+      if @foodtrucks.empty?
+        flash[:error] = "Couldn't find your search !"
+        redirect_to root_path
+      else
+        @foodtrucks
+      end
+    end
   end
 
   def new
@@ -29,7 +39,7 @@ class FoodTrucksController < ApplicationController
   private
 
   def foodtruck_params
-    params.require(:food_truck).permit(:name, :category, :price, :city, :description, :photo)
+    params.require(:food_truck).permit(:name, :category, :price, :city, :description, :photo, :search)
   end
 
   def set_foodtruck

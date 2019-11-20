@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
       )
 
       @reservation.update(checkout_session_id: session.id)
-      redirect_to new_food_truck_reservation_payment_path(@foodtruck, @reservation)
+      redirect_to reservations_path
     else
       render "food_trucks/show"
     end

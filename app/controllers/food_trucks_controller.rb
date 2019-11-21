@@ -12,7 +12,6 @@ class FoodTrucksController < ApplicationController
         food_trucks.name ILIKE :query \
         OR food_trucks.category ILIKE :query \
         OR food_trucks.city ILIKE :query \
-        OR food_trucks.description ILIKE :query \
       "
       @foodtrucks = policy_scope(FoodTruck).where(sql_query, query: "%#{params[:query]}%").order(created_at: :desc)
         if @foodtrucks.empty?

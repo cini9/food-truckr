@@ -20,7 +20,7 @@ class ReservationsController < ApplicationController
           currency: 'CHF',
           quantity: (@reservation.checkout_date - @reservation.checkin_date).to_i
         }],
-        success_url: food_truck_reservation_url(@foodtruck, @reservation),
+        success_url: food_truck_reservation_payments_paid_url(@foodtruck, @reservation),
         cancel_url: reservations_url
       )
 
@@ -28,15 +28,13 @@ class ReservationsController < ApplicationController
       redirect_to reservations_path
     else
 
-
       if @reservation.errors.any?
         flash[:notice] = @reservation.errors.messages[:user_id].join
       end
-      redirect_to food_truck_path(@foodtruck.id)
       if @reservation.checkout_date <= @reservation.checkin_date
         flash[:notice] = "Checkout date must be later than Checkin date!"
       end
-      render "food_trucks/show"
+      redirect_to food_truck_path(@foodtruck.id)
 
     end
   end

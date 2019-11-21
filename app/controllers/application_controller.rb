@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  protect_from_forgery with: :exception
   include Pundit
 
   # Pundit: white-list approach.
@@ -13,9 +15,26 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path)
   end
 
+  protected
+
+  def configure_permitted_parameters
+    # devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password)v}
+
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(
+        :name,
+        :description,
+        :food_truck_owner,
+        :email,
+        :password,
+        :current_password
+      )
+    end
+  end
+
   private
 
   def skip_pundit?
-    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^reservations$)/
+    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^reservations$)|(^payments$)/
   end
 end

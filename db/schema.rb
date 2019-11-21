@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_114140) do
+ActiveRecord::Schema.define(version: 2019_11_20_125753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(version: 2019_11_20_114140) do
     t.date "checkout_date"
     t.date "accepted_at"
     t.date "paid_at"
+    t.string "state"
+    t.string "reservation_sku"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "CHF", null: false
+    t.string "checkout_session_id"
     t.index ["food_truck_id"], name: "index_reservations_on_food_truck_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end

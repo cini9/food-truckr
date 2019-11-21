@@ -8,7 +8,7 @@ class FoodTruck < ApplicationRecord
   belongs_to :user
   validates :name, presence: true, uniqueness: true
   validates :category, inclusion: { in: CATEGORY }
-  validates :price_cents, presence: true
+  # validates :price, presence: true
   validates :city, presence: true
 
 end

@@ -10,15 +10,14 @@ class ReservationsController < ApplicationController
     @reservation.user = current_user
     @reservation.food_truck = @foodtruck
     @reservation.amount_cents = @foodtruck.price_cents
-    if @reservation.save!
+    if @reservation.checkout_date > @reservation.checkin_date && @reservation.save!
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
           name: @foodtruck.name,
-          # images: [@foodtruck.photo_url],
-          amount: @foodtruck.price_cents,
+          amount: @foodtruck.price_cents * 100 * (@reservation.checkout_date - @reservation.checkin_date).to_i,
           currency: 'CHF',
-          quantity: 1
+          quantity: (@reservation.checkout_date - @reservation.checkin_date).to_i
         }],
         success_url: food_truck_reservation_url(@foodtruck, @reservation),
         cancel_url: reservations_url
@@ -27,6 +26,9 @@ class ReservationsController < ApplicationController
       @reservation.update(checkout_session_id: session.id)
       redirect_to reservations_path
     else
+      if @reservation.checkout_date <= @reservation.checkin_date
+        flash[:notice] = "Checkout date must be later than Checkin date!"
+      end
       render "food_trucks/show"
     end
   end

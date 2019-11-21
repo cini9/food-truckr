@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
 
   def index
     @userreservations = Reservation.where(user_id: current_user.id)
-    @ownerreservations = Reservation.joins(:food_truck).where(user_id: current_user.id)
+    @ownerreservations = Reservation.joins(:food_truck).where("food_trucks.user_id = #{current_user.id}")
   end
 
   def update

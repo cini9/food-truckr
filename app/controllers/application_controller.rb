@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
         :food_truck_owner,
         :email,
         :password,
-        :current_password
+        :current_password,
+        :avatar
       )
     end
   end

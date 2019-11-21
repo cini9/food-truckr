@@ -20,6 +20,7 @@
       input_html: { autocomplete: "new-password" } %> -->
     <%= f.input :name %>
     <%= f.input :description %>
+    <%= f.file_field :avatar %>
     <div class="d-flex align-items-center justify-content-between my-2">
       <%= f.input :food_truck_owner %>
       <% if resource.food_truck_owner && FoodTruck.where(user: resource).count > 0 %>

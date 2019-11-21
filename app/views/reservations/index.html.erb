@@ -16,6 +16,7 @@
           <% else %>
             <% url = cl_image_path "generic_l79l58", height: 300, width: 300, crop: :fill %>
           <% end %>
+
           <div class="col-4">
             <div class="card-category my-2 d-flex flex-column bd-highlight mb-3", id="reservation-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
 
@@ -36,51 +37,43 @@
       </div>
     </div>
   </div>
-  <% else %>
-  <h2 class="mt-3 row justify-content-center">No Bookings Yet</h2>
+<% else %>
+  <h2 class="mt-3 row justify-content-center">No bookings yet</h2>
 <% end %>
-<% if @ownerreservations.present? %>
-<h2 class="mt-3 row justify-content-center">Your Food Truck(s) bookings</h2>
 
-<% if @ownerreservations.count >0 %>
+<% if @ownerreservations.present? %>
   <h2 class="mt-3 row justify-content-center">Your Food Truck(s) bookings</h2>
 
-  <% @ownerreservations.each do |reservation| %>
-    <%if reservation.food_truck.user_id == current_user.id %>
+  <div class="index container mt-3">
+    <div class="cards">
+      <div class="row">
+        <% @ownerreservations.each do |reservation| %>
 
+          <% if reservation.food_truck.photo.present? %>
+            <% url = cl_image_path reservation.food_truck.photo, height: 300, width: 300, crop: :fill %>
+          <% else %>
+            <% url = cl_image_path "generic_l79l58", height: 300, width: 300, crop: :fill %>
+          <% end %>
 
-      <div class="index container mt-3">
-        <div class="cards">
-          <div class="row">
+          <div class="col-4">
+            <div class="card-category my-2 d-flex flex-column bd-highlight mb-3", id="reservation-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
 
-            <% if reservation.food_truck.photo.present? %>
-              <% url = cl_image_path reservation.food_truck.photo, height: 300, width: 300, crop: :fill %>
-            <% else %>
-              <% url = cl_image_path "generic_l79l58", height: 300, width: 300, crop: :fill %>
-            <% end %>
+              <div class="reservation_cards p-2 bd-highlight"><%= reservation.user.email%></div>
+              <div class="reservation_cards p-2 bd-highlight"><%= reservation.food_truck.name %></div>
+              <div class="reservation_cards p-2 bd-highlight"><%= "checkin date : #{reservation.checkin_date}" %></div>
+              <div class="reservation_cards p-2 bd-highlight"><%=  "checkout date : #{reservation.checkout_date}"  %></div>
 
-
-            <div class="col-4">
-              <div class="card-category my-2 d-flex flex-column bd-highlight mb-3", id="reservation-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
-                <div class="reservation_cards p-2 bd-highlight"><%= reservation.user.email%></div>
-                <div class="reservation_cards p-2 bd-highlight"><%= reservation.food_truck.name %></div>
-                <div class="reservation_cards p-2 bd-highlight"><%= "checkin date : #{reservation.checkin_date}" %></div>
-                <div class="reservation_cards p-2 bd-highlight"><%=  "checkout date : #{reservation.checkout_date}"  %></div>
-
-                <% if reservation.accepted_at == nil%>
-                  <%= link_to "Accept the booking", reservation_path(reservation.id), method: :patch, class: "btn btn-success"%>
-                <% elsif reservation.accepted_at != nil && reservation.paid_at == nil%>
-                  <div class="reservation_cards_npy p-2 bd-highlight"><%="Not paid yet"%></div>
-                <% else %>
-                  <div class="reservation_cards_p p-2 bd-highlight"><%="Paid by #{reservation.user.name} on #{reservation.paid_at}" %></div>
-                <% end %>
-              </div>
+              <% if reservation.accepted_at == nil%>
+                <%= link_to "Accept the booking", reservation_path(reservation.id), method: :patch, class: "btn btn-success"%>
+              <% elsif reservation.accepted_at != nil && reservation.paid_at == nil%>
+                <div class="reservation_cards_npy p-2 bd-highlight"><%="Not paid yet"%></div>
+              <% else %>
+                <div class="reservation_cards_p p-2 bd-highlight"><%="Paid by #{reservation.user.name} on #{reservation.paid_at}" %></div>
+              <% end %>
             </div>
           </div>
-        </div>
-      <%end %>
+        <%end %>
+      </div>
     </div>
   </div>
-</div>
 <% end %>
-

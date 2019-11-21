@@ -22,7 +22,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
-    raise
     resource.avatar.attach(params[:avatar]) if params[:avatar].present?
   end
 

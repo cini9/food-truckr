@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   # Pundit: white-list approach.
-  after_action :verify_authorized, except: :index, unless: :skip_pundit?
+  after_action :verify_authorized, except: [:index, :home], unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
   # Uncomment when you *really understand* Pundit!
@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
         :food_truck_owner,
         :email,
         :password,
-        :current_password
+        :current_password,
+        :avatar
       )
     end
   end

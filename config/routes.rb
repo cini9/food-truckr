@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   resources :food_trucks, only: [:index, :show, :new, :create, :edit, :update] do
     resources :reservations, only: [:new, :create, :show] do
-      resources :payments, only: :new
+      get 'payments/new', to: 'payments#new'
+      get 'payments/paid', to: 'payments#paid'
     end
   end
   resources :reservations, only: [:index, :update]

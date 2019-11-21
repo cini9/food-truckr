@@ -50,15 +50,6 @@ ActiveRecord::Schema.define(version: 2019_11_21_124612) do
     t.index ["user_id"], name: "index_food_trucks_on_user_id"
   end
 
-  create_table "photos", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "avatar"
-    t.string "photo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_photos_on_user_id"
-  end
-
   create_table "reservations", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "food_truck_id"
@@ -94,7 +85,6 @@ ActiveRecord::Schema.define(version: 2019_11_21_124612) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "food_trucks", "users"
-  add_foreign_key "photos", "users"
   add_foreign_key "reservations", "food_trucks"
   add_foreign_key "reservations", "users"
 end

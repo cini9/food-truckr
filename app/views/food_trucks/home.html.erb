@@ -1,0 +1,21 @@
+<div class="banner" style="background-image: url('https://images.unsplash.com/photo-1500338427510-5deb175987d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1654&q=80');">>
+  <h1>Food Truckr</h1>
+</div>
+
+<h2 class="mt-3 row justify-content-center" style="margin-right: 0; margin-left: 0;">See Food trucks around you!</h2>
+
+<div class="index container mt-3">
+  <div class="cards">
+    <div class="row">
+      <% FoodTruck::CATEGORIES.each do |category| %>
+        <% url = cl_image_path category %>
+      <div class="col-4">
+        <%= link_to food_trucks_path(query: category) do %>
+          <div class="card-category my-2", id="foodtruck-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
+            <%= category %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

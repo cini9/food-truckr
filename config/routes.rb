@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'food_trucks#index'
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
+  root to: 'food_trucks#home'
 
   resources :food_trucks, only: [:index, :show, :new, :create, :edit, :update] do
     resources :reservations, only: [:new, :create, :show] do

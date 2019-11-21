@@ -1,18 +1,27 @@
 class FoodTrucksController < ApplicationController
   before_action :set_foodtruck, only: [:show, :edit]
+  before_action :skip_pundit?, only: :home
   skip_before_action :authenticate_user!, only: [:index, :show]
 
+  def home
+  end
+
   def index
-    if params[:search].nil? || params[:search].empty?
-      @foodtrucks = policy_scope(FoodTruck).order(created_at: :desc)
+    if params[:query].present?
+      sql_query = " \
+        food_trucks.name ILIKE :query \
+        OR food_trucks.category ILIKE :query \
+        OR food_trucks.city ILIKE :query \
+      "
+      @foodtrucks = policy_scope(FoodTruck).where(sql_query, query: "%#{params[:query]}%").order(created_at: :desc)
+        if @foodtrucks.empty?
+          flash[:notice] = "Couldn't find your search !"
+          redirect_to root_path
+        else
+          @foodtrucks
+        end
     else
-      @foodtrucks = policy_scope(FoodTruck).where(category: params[:search]).order(created_at: :desc)
-      if @foodtrucks.empty?
-        flash[:error] = "Couldn't find your search !"
-        redirect_to root_path
-      else
-        @foodtrucks
-      end
+      @foodtrucks = policy_scope(FoodTruck).order(created_at: :desc)
     end
   end
 

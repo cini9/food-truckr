@@ -4,6 +4,9 @@ class FoodTruckPolicy < ApplicationPolicy
       scope.all
     end
   end
+  def home
+    true
+  end
 
   def show?
     true

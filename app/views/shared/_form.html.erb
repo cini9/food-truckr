@@ -1,7 +1,7 @@
 <div class="container">
   <%= simple_form_for @foodtruck do |f| %>
     <%= f.input :name %>
-    <%= f.input :category, collection: FoodTruck::CATEGORY %>
+    <%= f.input :category, collection: FoodTruck::CATEGORIES %>
     <%= f.input :price_cents %>
     <%= f.input :city %>
     <%= f.input :description %>

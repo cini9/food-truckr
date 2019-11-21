@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  protect_from_forgery with: :exception
   include Pundit
 
   # Pundit: white-list approach.
@@ -11,6 +13,23 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(root_path)
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    # devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password)v}
+
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(
+        :name,
+        :description,
+        :food_truck_owner,
+        :email,
+        :password,
+        :current_password
+      )
+    end
   end
 
   private

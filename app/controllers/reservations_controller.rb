@@ -18,7 +18,19 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = Reservation.where(user_id: current_user.id)
+    @userreservations = Reservation.where(user_id: current_user.id)
+    @ownerreservations = Reservation.joins(:food_truck).where(user_id: current_user.id)
+  end
+
+  def update
+    @reservation = Reservation.find(params[:id])
+    if @reservation.accepted_at == nil
+      @reservation.accepted_at = Time.now
+      redirect_to reservations_path
+    else
+      @reservation.paid_at = Time.now
+      redirect_to reservations_path
+    end
   end
 
   private

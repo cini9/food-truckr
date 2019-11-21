@@ -1,5 +1,4 @@
 class Reservation < ApplicationRecord
-
   monetize :amount_cents
 
   belongs_to :user

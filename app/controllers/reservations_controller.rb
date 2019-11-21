@@ -24,13 +24,13 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    if @reservation.accepted_at == nil
+    if @reservation.accepted_at.nil?
       @reservation.accepted_at = Time.now
-      redirect_to reservations_path
     else
       @reservation.paid_at = Time.now
-      redirect_to reservations_path
     end
+    @reservation.save
+    redirect_to reservations_path
   end
 
   private

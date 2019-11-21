@@ -25,7 +25,7 @@
 
             <% if reservation.accepted_at == nil%>
               <div class="reservation_cards_nay p-2 bd-highlight"><%="Not accepted yet"%></div>
-            <% elsif reservation.accepted_at != nil && paid_at == nil%>
+            <% elsif reservation.accepted_at != nil && reservation.paid_at == nil%>
               <button type="button" class="btn btn-primary">I pay now</button>
               <%-# TODO: action for when user click on PAY%>
             <% else %>
@@ -62,7 +62,7 @@
 
             <% if reservation.accepted_at == nil%>
               <%= link_to "Accept the booking", reservation_path(reservation.id), method: :patch, class: "btn btn-success"%>
-            <% elsif reservation.accepted_at != nil && paid_at == nil%>
+            <% elsif reservation.accepted_at != nil && reservation.paid_at == nil%>
               <div class="reservation_cards_npy p-2 bd-highlight"><%="Not paid yet"%></div>
             <% else %>
               <div class="reservation_cards_p p-2 bd-highlight"><%="Paid by #{reservation.user.name} on #{reservation.paid_at}" %></div>

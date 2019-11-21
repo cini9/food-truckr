@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
           quantity: 1
         }],
         success_url: food_truck_reservation_url(@foodtruck, @reservation),
-        cancel_url: food_truck_reservation_url(@foodtruck, @reservation)
+        cancel_url: reservations_url
       )
 
       @reservation.update(checkout_session_id: session.id)
@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
 
   def index
     @userreservations = Reservation.where(user_id: current_user.id)
-    @ownerreservations = Reservation.joins(:food_truck).where(user_id: current_user.id)
+    @ownerreservations = Reservation.joins(:food_truck).where("food_trucks.user_id = #{current_user.id}")
   end
 
   def update

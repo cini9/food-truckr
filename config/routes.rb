@@ -8,7 +8,5 @@ Rails.application.routes.draw do
       resources :payments, only: :new
     end
   end
-
-  resources :reservations, only: [:index]
-
+  resources :reservations, only: [:index, :update]
 end

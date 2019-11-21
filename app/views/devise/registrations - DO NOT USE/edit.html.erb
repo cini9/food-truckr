@@ -23,6 +23,10 @@
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.input :food_truck_owner %>
+    <% raise %>
+    <% if resource.food_truck_owner && FoodTruck.where(user: resource) > 0 %>
+      <%= link_to "Add a new food truck", new_food_truck_path %>
+    <% end %>
     <%= f.input :current_password,
                 hint: "we need your current password to confirm your changes",
                 required: true,

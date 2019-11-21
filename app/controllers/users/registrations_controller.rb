@@ -59,4 +59,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def after_update_path_for(resource)
+    if resource.food_truck_owner && FoodTruck.where(user: resource).count == 0
+      new_food_truck_path
+    else
+      sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
+    end
+  end
 end

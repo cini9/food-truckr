@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
     @reservation.user = current_user
     @reservation.food_truck = @foodtruck
     @reservation.amount_cents = @foodtruck.price_cents
-    if @reservation.save!
+    if @reservation.save
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
@@ -27,7 +27,11 @@ class ReservationsController < ApplicationController
       @reservation.update(checkout_session_id: session.id)
       redirect_to reservations_path
     else
-      render "food_trucks/show"
+
+      if @reservation.errors.any?
+        flash[:notice] = @reservation.errors.messages[:user_id].join
+      end
+      redirect_to food_truck_path(@foodtruck.id)
     end
   end
 

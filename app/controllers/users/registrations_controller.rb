@@ -68,4 +68,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
     end
   end
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
 end

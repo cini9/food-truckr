@@ -34,7 +34,7 @@ class FoodTrucksController < ApplicationController
     @foodtruck = FoodTruck.new(foodtruck_params)
     @foodtruck.user = current_user
     if @foodtruck.save
-      redirect_to food_trucks_path
+      redirect_to food_truck_path(@foodtruck)
     else
       render 'new'
     end

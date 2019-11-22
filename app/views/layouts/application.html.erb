@@ -20,12 +20,6 @@
       <% end %>
       <%= yield %>
     </div>
-    <% if notice %>
-    <p class="alert alert-danger text-center"><%= notice %></p>
-    <% elsif alert %>
-    <p class="alert alert-danger text-center"><%= alert %></p>
-    <% end %>
-    <%= yield %>
     <%= render 'shared/footer' %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>

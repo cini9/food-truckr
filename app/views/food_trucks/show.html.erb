@@ -1,16 +1,25 @@
 
 <div class="container">
-  <div class="row">
+  <div class="row mt-3">
     <div class="col-8 center-block">
       <div class="container">
         <div class="column">
-          <div class="card" style="width: 100%;">
-            <% if @foodtruck.photo.present? %>
-              <%= cl_image_tag @foodtruck.photo, crop: :fill, class: "card-img-top" %>
-            <% else %>
-              <%= cl_image_tag "generic_l79l58",crop: :fill, class: "card-img-top" %>
-            <% end %>
-              <p class="card-text p-3"><%= @foodtruck.description %></p>
+          <div class="card" style="width: 100%; height: 566px;">
+            <div class="food-truck-image" style="max-height:465px;">
+              <% if @foodtruck.photo.present? %>
+                <%= cl_image_tag @foodtruck.photo, crop: :fill, height: 465, class: "card-img-top" %>
+              <% else %>
+                <%= cl_image_tag "generic_l79l58",crop: :fill, height: 465, class: "card-img-top" %>
+              <% end %>
+            </div>
+            <p class="card-text p-3">
+              <%= @foodtruck.description %>
+              <% if policy(@foodtruck).edit? %>
+                <%= link_to edit_food_truck_path(@foodtruck), class: 'ml-3' do %>
+                  <i class="fas fa-pencil-alt fa-lg mr-3"></i>
+                <% end %>
+              <% end %>
+            </p>
           </div>
         </div>
       </div>
@@ -18,8 +27,8 @@
     <div class="col-4">
       <div class="container">
         <div class="column center-block">
-          <div class="col-sm ">
-            <div class="label">name :</div> <div class="text-box "><%= @foodtruck.name %></div>
+          <div class="col-sm">
+            <div class="label">name :</div> <div class="text-box"><%= @foodtruck.name %></div>
           </div>
           <div class="col-sm ">
             <div class="label">city :</div> <div class="text-box"><%= @foodtruck.city %></div>
@@ -31,16 +40,16 @@
             <div class="label">price :</div>  <div class="text-box"> <%= "#{humanized_money(@foodtruck.price_cents)} #{@foodtruck.price_currency}" %></div>
           </div>
           <div class="col-sm">
-            <%= link_to "back", :back, class: 'btn btn-primary' %>
-            <% if policy(@foodtruck).edit? %>
-              <%= link_to "edit", edit_food_truck_path(@foodtruck), class: 'btn btn-primary ml-3' %>
-            <% end %>
+
           </div>
-          <div class="col-sm">
+          <div class="col-sm mt-3">
             <%= simple_form_for [@foodtruck, @reservation] do |f| %>
             <%= f.input :checkin_date, order: [:day, :month, :year], :default => Date.today %>
             <%= f.input :checkout_date, order: [:day, :month, :year], :default => Date.today + 1 %>
-            <%= f.button :submit, class: "btn btn-primary" %>
+            <div class="d-flex justify-content-between">
+              <%= f.button :submit, class: "btn btn-primary" %>
+              <%= link_to "back", :back, class: 'btn btn-primary' %>
+            </div>
            <% end %>
           </div>
         </div>

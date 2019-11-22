@@ -24,8 +24,8 @@
               <div class="card-booking-infos text-center">
                 <div class="booking title"><%= reservation.food_truck.name %></div>
                 <div class="booking-info">
-                  <div><%= "checkin date : #{reservation.checkin_date}" %></div>
-                  <div><%= "checkout date : #{reservation.checkout_date}"  %></div>
+                  <div><%= "checkin date : #{reservation.checkin_date.strftime("%m/%d/%Y at %I:%M%p")}" %></div>
+                  <div><%= "checkout date : #{reservation.checkout_date.strftime("%m/%d/%Y at %I:%M%p")}"  %></div>
                   <div><%= "price: #{reservation.food_truck.price * 100} CHF" %></div>
 
                   <% if reservation.accepted_at == nil%>
@@ -33,7 +33,7 @@
                   <% elsif reservation.accepted_at != nil && reservation.paid_at == nil%>
                     <button type="button" class="btn btn-primary" onclick="Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>').redirectToCheckout({sessionId: '<%= reservation.checkout_session_id %>'})">I pay now</button>
                   <% else %>
-                    <div class="booking_cards_p p-2 bd-highlight"><%="Paid on #{reservation.paid_at}" %></div>
+                    <div class="booking_cards_p p-2 bd-highlight"><%=reservation.paid_at.strftime("Paid on %m/%d/%Y at %I:%M%p ")%></div>
                   <% end %>
                 </div>
               </div>
@@ -70,8 +70,8 @@
                 <div class="booking-info">
 
                   <div><%= reservation.food_truck.name%></div>
-                  <div><%= "checkin date : #{reservation.checkin_date}" %></div>
-                  <div><%= "checkout date : #{reservation.checkout_date}"  %></div>
+                  <div><%= "checkin date : #{reservation.checkin_date.strftime("%m/%d/%Y at %I:%M%p")}" %></div>
+                  <div><%= "checkout date : #{reservation.checkout_date.strftime("%m/%d/%Y at %I:%M%p")}"  %></div>
                   <div><%= "price: #{reservation.food_truck.price * 100} CHF" %></div>
 
                   <% if reservation.accepted_at == nil%>
@@ -79,7 +79,7 @@
                   <% elsif reservation.accepted_at != nil && reservation.paid_at == nil%>
                     <div class="booking_cards_npy p-2 bd-highlight"><%="Not paid yet"%></div>
                   <% else %>
-                    <div class="booking_cards_p p-2 bd-highlight"><%="Paid by #{reservation.user.name} on #{reservation.paid_at}"%></div>
+                    <div class="booking_cards_p p-2 bd-highlight"><%="Paid by #{reservation.user.name} on #{reservation.paid_at.strftime("%m/%d/%Y at %I:%M%p ")}"%></div>
                   <% end %>
                 </div>
               </div>

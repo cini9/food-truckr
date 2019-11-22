@@ -13,9 +13,9 @@
   <body>
     <%= render 'shared/navbar' %>
     <% if notice %>
-    <p class="alert alert-primary text-center"><%= notice %></p>
+    <p class="alert alert-danger text-center"><%= notice %></p>
     <% elsif alert %>
-    <p class="alert alert-primary text-center"><%= alert %></p>
+    <p class="alert alert-danger text-center"><%= alert %></p>
     <% end %>
     <%= yield %>
     <%= render 'shared/footer' %>

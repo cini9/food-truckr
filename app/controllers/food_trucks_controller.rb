@@ -15,7 +15,7 @@ class FoodTrucksController < ApplicationController
       "
       @foodtrucks = policy_scope(FoodTruck).where(sql_query, query: "%#{params[:query]}%").order(created_at: :desc)
         if @foodtrucks.empty?
-          flash[:notice] = "Couldn't find your search !"
+          flash[:alert] = "Couldn't find your search !"
           redirect_to root_path
         else
           @foodtrucks
@@ -57,7 +57,7 @@ class FoodTrucksController < ApplicationController
       flash[:notice] = 'Food Truck updated'
     else
       render :edit
-      flash.now[:error] = 'Food truck not updated !'
+      flash.now[:alert] = 'Food truck not updated !'
     end
     authorize @foodtruck
   end

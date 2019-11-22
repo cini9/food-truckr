@@ -26,6 +26,7 @@
                 <div class="booking-info">
                   <div><%= "checkin date : #{reservation.checkin_date}" %></div>
                   <div><%= "checkout date : #{reservation.checkout_date}"  %></div>
+                  <div><%= "price: #{reservation.food_truck.price} CHF" %></div>
 
                   <% if reservation.accepted_at == nil%>
                     <div class="booking_cards_nay p-2 bd-highlight"><%="Not accepted yet"%></div>
@@ -71,6 +72,7 @@
                   <div><%= reservation.food_truck.name%></div>
                   <div><%= "checkin date : #{reservation.checkin_date}" %></div>
                   <div><%= "checkout date : #{reservation.checkout_date}"  %></div>
+                  <div><%= "price: #{reservation.food_truck.price} CHF" %></div>
 
                   <% if reservation.accepted_at == nil%>
                     <%= link_to "Accept the booking", reservation_path(reservation.id), method: :patch, class: "btn btn-success"%>

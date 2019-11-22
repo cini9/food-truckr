@@ -38,8 +38,8 @@
           </div>
           <div class="col-sm">
             <%= simple_form_for [@foodtruck, @reservation] do |f| %>
-            <%= f.input :checkin_date %>
-            <%= f.input :checkout_date %>
+            <%= f.input :checkin_date, order: [:day, :month, :year], :default => Date.today %>
+            <%= f.input :checkout_date, order: [:day, :month, :year], :default => Date.today + 1 %>
             <%= f.button :submit, class: "btn btn-primary" %>
            <% end %>
           </div>

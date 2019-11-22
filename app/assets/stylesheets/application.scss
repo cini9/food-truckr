@@ -11,3 +11,11 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+.mainbody {
+  margin-top: 0px;
+  display: flex;
+  min-height: calc(100vh - #{$navbarHeight} - #{$footerHeight});
+  flex-direction: column;
+  justify-content: space-between
+}

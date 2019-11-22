@@ -1,6 +1,53 @@
-<div class="container mb-3" style="width: 600px">
-  <div class="text-box" style="width: 600px">
-    <h2 class="my-3" style="text-align:center">Edit Your Food Truck</h2>
-    <%= render 'shared/form' %>
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-8 center-block">
+      <div class="container">
+        <div class="column">
+          <div class="card" style="width: 100%; height: 566px;">
+            <div class="food-truck-image" style="max-height:465px;">
+              <%= simple_form_for @foodtruck do |f| %>
+                <% if @foodtruck.photo.present? %>
+                  <%= cl_image_tag @foodtruck.photo, crop: :fill, height: 465, class: "card-img-top" %>
+                <% else %>
+                  <%= cl_image_tag "generic_l79l58",crop: :fill, height: 465, class: "card-img-top" %>
+                <% end %>
+                <%= f.input :description, style: 'margin-top:-20px' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="container">
+        <div class="column center-block">
+          <div class="col-sm">
+            <%= f.input :photo %>
+            <%= f.input :photo_cache, as: :hidden %>
+            <div class="label"></div> <div class="text-box"><%= f.input :name %></div>
+          </div>
+          <div class="col-sm ">
+            <div class="label"></div> <div class="text-box"> <%= f.input :city %></div>
+          </div>
+          <div class="col-sm ">
+            <div class="label"></div> <div class="text-box"><%= f.input :category, collection: FoodTruck::CATEGORIES %></div>
+          </div>
+          <div class="col-sm ">
+            <div class="label"></div>  <div class="text-box">  <%= f.input :price_cents, label: 'Price' %></div>
+          </div>
+          <div class="col-sm">
+               <%= f.submit "Submit", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
+
+
+
+
+
+

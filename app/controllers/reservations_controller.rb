@@ -29,10 +29,10 @@ class ReservationsController < ApplicationController
     else
 
       if @reservation.errors.any?
-        flash[:notice] = @reservation.errors.messages[:user_id].join
+        flash[:alert] = @reservation.errors.messages[:user_id].join
       end
       if @reservation.checkout_date <= @reservation.checkin_date
-        flash[:notice] = "Checkout date must be later than Checkin date!"
+        flash[:alert] = "Checkout date must be later than Checkin date!"
       end
       redirect_to food_truck_path(@foodtruck.id)
 
@@ -53,6 +53,7 @@ class ReservationsController < ApplicationController
     end
     @reservation.save
     redirect_to reservations_path
+    flash.now[:notice] = 'Booked'
   end
 
   def show
@@ -64,5 +65,4 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(:checkin_date, :checkout_date)
   end
-
 end

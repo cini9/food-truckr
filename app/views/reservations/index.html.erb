@@ -79,7 +79,7 @@
                   <% elsif reservation.accepted_at != nil && reservation.paid_at == nil%>
                     <div class="booking_cards_npy p-2 bd-highlight"><%="Not paid yet"%></div>
                   <% else %>
-                    <div class="booking_cards_p p-2 bd-highlight"><%="Paid by #{reservation.user.name} on #{reservation.paid_at.strftime("%m/%d/%Y at %I:%M%p ")}"%></div>
+                    <div class="booking_cards_p p-2 bd-highlight"><%="Paid by #{reservation.user.email} on #{reservation.paid_at.strftime("%m/%d/%Y at %I:%M%p ")}"%></div>
                   <% end %>
                 </div>
               </div>

@@ -1,5 +1,4 @@
-
-<h2 class="mt-3 row justify-content-center">See Food trucks around you!</h2>
+<h2 class="mt-3 row justify-content-center">Food Trucks</h2>
 
 <div class="index container mt-3">
   <div class="cards">
@@ -10,13 +9,22 @@
       <% else %>
         <% url = cl_image_path "generic_l79l58", height: 300, width: 300, crop: :fill %>
     <% end %>
-      <div class="col-4">
-        <%= link_to food_truck_path(foodtruck) do %>
-          <div class="card-category my-2", id="foodtruck-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
-            <%= foodtruck.name %>
+      <div class="col-6">
+
+        <%= link_to food_truck_path(foodtruck), class: "text-decoration-none text-reset" do %>
+          <div class="card-product">
+            <img src="<%= url %>" />
+            <div class="card-product-infos">
+              <h2><%= foodtruck.name %></h2>
+              <p><%= foodtruck.description %></p>
+              <p><%= foodtruck.city %></p>
+              <p><%= foodtruck.price_cents %> CHF</p>
+            </div>
           </div>
         <% end %>
       </div>
     <% end %>
   </div>
 </div>
+
+

@@ -1,7 +1,7 @@
 class FoodTrucksController < ApplicationController
   before_action :set_foodtruck, only: [:show, :edit]
   before_action :skip_pundit?, only: :home
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :home]
 
   def home
   end

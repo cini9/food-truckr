@@ -52,22 +52,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  def after_sign_up_path_for(resource)
-    edit_user_registration_path
-  end
+  # def after_sign_up_path_for(resource)
+  #   edit_user_registration_path
+  # end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
 
-  def after_update_path_for(resource)
-    if resource.food_truck_owner && FoodTruck.where(user: resource).count == 0
-      new_food_truck_path
-    else
-      sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
-    end
-  end
+  # def after_update_path_for(resource)
+  #   sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
+  # end
 
   def update_resource(resource, params)
     resource.update_without_password(params)

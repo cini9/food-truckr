@@ -16,7 +16,7 @@ class ReservationsController < ApplicationController
         payment_method_types: ['card'],
         line_items: [{
           name: @foodtruck.name,
-          amount: @foodtruck.price_cents * 100 * (@reservation.checkout_date - @reservation.checkin_date).to_i,
+          amount: @foodtruck.price_cents * 100,
           currency: 'CHF',
           quantity: (@reservation.checkout_date - @reservation.checkin_date).to_i
         }],

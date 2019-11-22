@@ -12,7 +12,7 @@
       <div class="col-4">
         <%= link_to food_trucks_path(query: category) do %>
           <div class="card-category my-2", id="foodtruck-card", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url %>')">
-            <%= category %>
+            <%= "#{category.capitalize} (#{FoodTruck.where(category: category).count})" %>
           </div>
         <% end %>
       </div>
